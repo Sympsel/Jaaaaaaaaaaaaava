@@ -155,7 +155,7 @@ public class Test {
                     if (hm.containsKey(end)) hm.put(end, hm.get(end) + 1);
                     else hm.put(end, 1);
                 }
-            } else {
+            } else if (file.isDirectory()) {
                 HashMap<String, Integer> sonMap = test8(file.getAbsolutePath());
                 Set<Map.Entry<String, Integer>> entries = sonMap.entrySet();
                 for (Map.Entry<String, Integer> entry : entries) {
@@ -169,7 +169,10 @@ public class Test {
     }
 
     public static void main(String[] args) throws IOException {
-        HashMap<String, Integer> ret = test8("D:/桌面/游戏/.minecraft");
+        String s = "D:/桌面工/作文件/PS/.psd";
+        HashMap<String, Integer> ret = test8(s);
         System.out.println(ret);
+        System.out.println(new File(s).isFile());
     }
+    // 原码 = 反码
 }
