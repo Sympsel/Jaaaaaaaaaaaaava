@@ -227,8 +227,45 @@ public class Test {
         while ((line = br.readLine()) != null) System.out.println(line);
         br.close();
     }
+    // test11("D:/桌面/code/javacodepractice/date4.1/tempfile2/copy_reName.bat");
+
+    public static int test12(int maxTimes) throws IOException {
+        File f = new File("tempfile/runtimes.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        String line = br.readLine();
+        int cnt = Integer.parseInt(line) + 1;
+        if (cnt > maxTimes) return maxTimes;
+        System.out.println("当前运行次数为：" + cnt);
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        bw.write(cnt + "");
+        br.close();
+        bw.close();
+        return cnt;
+    }
+
+    public static void reCount() throws IOException {
+        File f = new File("tempfile/runtimes.txt");
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write('0');
+        fos.close();
+    }
+
+    public static void test13(int runTimes, int maxTimes) throws IOException {
+        int times = 0;
+        for (int i = 0; i < runTimes; i++) {
+            times = test12(maxTimes);
+            if (times >= maxTimes) {
+                System.out.println("已经免费运行了" + maxTimes + "次，不能再继续运行了，得充VIP");
+                break;
+            }
+        }
+    }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        test11("D:/桌面/code/javacodepractice/date4.1/tempfile2/copy_reName.bat");
+        int MAX_TIMES = 12;
+        int RUN_TIMES = 13;
+
+        reCount();
+        test13(RUN_TIMES, MAX_TIMES);
     }
 }
