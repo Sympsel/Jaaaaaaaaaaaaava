@@ -151,7 +151,7 @@ public class Test {
 
         for (File file : files) {
             if (file.isDirectory())
-                copyDir(file.getAbsolutePath(), String.valueOf(new File(destDir,file.getName())));
+                copyDir(file.getAbsolutePath(), String.valueOf(new File(destDir, file.getName())));
             else if (file.isFile()) {
                 FileInputStream fis = new FileInputStream(file);
                 FileOutputStream fos = new FileOutputStream(new File(destDir, file.getName()));
@@ -170,7 +170,7 @@ public class Test {
         FileOutputStream fos = new FileOutputStream(destFile);
 
         int b;
-        while((b = fis.read()) != -1) fos.write(b ^ 123);
+        while ((b = fis.read()) != -1) fos.write(b ^ 123);
 
 
         fos.close();
@@ -182,7 +182,7 @@ public class Test {
         FileOutputStream fos = new FileOutputStream(unlockedFile);
 
         int b;
-        while((b = fis.read()) != -1) fos.write(b ^ 123);
+        while ((b = fis.read()) != -1) fos.write(b ^ 123);
 
         fos.close();
         fis.close();
@@ -194,11 +194,41 @@ public class Test {
         FileReader fr = new FileReader(src);
         StringBuilder sb = new StringBuilder();
         int ch;
-        while ((ch = fr.read()) != -1) sb.append((char)ch);
+        while ((ch = fr.read()) != -1) sb.append((char) ch);
         fr.close();
         System.out.println(sb);
     }
+    // test8("tempfile2/copy_reName.bat");
+
+    public static void test9(String src, String dest) throws IOException, InterruptedException {
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(src));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dest));
+        int b;
+        while ((b = bis.read()) != -1) bos.write(b ^ 123);
+        bos.close();
+        bis.close();
+    }
+
+    public static void test10(String src, String dest) throws IOException, InterruptedException {
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(src));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dest));
+        int len;
+        byte[] r = new byte[1024];
+        while ((len = bis.read(r)) != -1) bos.write(r, 0, len);
+        bos.close();
+        bis.close();
+    }
+//    test9("tempfile/小桃qq头像.jpg", "tempfile/小桃qq头像2.jpg");
+//    test10("tempfile/小桃qq头像2.jpg", "tempfile2/小桃qq头像.jpg");
+
+    public static void test11(String src) throws IOException, InterruptedException {
+        BufferedReader br = new BufferedReader(new FileReader(src));
+        String line;
+        while ((line = br.readLine()) != null) System.out.println(line);
+        br.close();
+    }
+
     public static void main(String[] args) throws IOException, InterruptedException {
-        test8("tempfile2/copy_reName.bat");
+        test11("D:/桌面/code/javacodepractice/date4.1/tempfile2/copy_reName.bat");
     }
 }
