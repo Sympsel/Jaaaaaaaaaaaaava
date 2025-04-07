@@ -118,7 +118,7 @@ public class Test {
         FileOutputStream fos = new FileOutputStream("tempfile/2.txt");
 
         int b;
-        while((b = fis.read()) != -1) {
+        while ((b = fis.read()) != -1) {
             fos.write(b);
         }
 
@@ -142,10 +142,63 @@ public class Test {
         fr.close();
     }
 
-    public static void test8() {
+    public static void copyDir(final String srcDir, String destDir) throws IOException {
+        File f = new File(srcDir);
+        File d = new File(destDir);
+        d.mkdirs();
 
+        File[] files = f.listFiles();
+
+        for (File file : files) {
+            if (file.isDirectory())
+                copyDir(file.getAbsolutePath(), String.valueOf(new File(destDir,file.getName())));
+            else if (file.isFile()) {
+                FileInputStream fis = new FileInputStream(file);
+                FileOutputStream fos = new FileOutputStream(new File(destDir, file.getName()));
+                byte[] read = new byte[1024];
+                int len;
+                while ((len = fis.read(read)) != -1) fos.write(read, 0, len);
+                fos.close();
+                fis.close();
+            }
+        }
+    }
+    // copyDir("tempfile", "tempfile2");
+
+    public static void lockedFile(String srcFile, String destFile) throws IOException, InterruptedException {
+        FileInputStream fis = new FileInputStream(srcFile);
+        FileOutputStream fos = new FileOutputStream(destFile);
+
+        int b;
+        while((b = fis.read()) != -1) fos.write(b ^ 123);
+
+
+        fos.close();
+        fis.close();
+    }
+
+    public static void unlockedFile(String lockedFile, String unlockedFile) throws IOException, InterruptedException {
+        FileInputStream fis = new FileInputStream(lockedFile);
+        FileOutputStream fos = new FileOutputStream(unlockedFile);
+
+        int b;
+        while((b = fis.read()) != -1) fos.write(b ^ 123);
+
+        fos.close();
+        fis.close();
+    }
+//    lockedFile("D:/桌面/小桃qq头像.jpg","tempfile/小桃qq头像.jpg");
+//    unlockedFile("tempfile/小桃qq头像.jpg","tempfile2/小桃qq头像.jpg");
+
+    public static void test8(final String src) throws IOException, InterruptedException {
+        FileReader fr = new FileReader(src);
+        StringBuilder sb = new StringBuilder();
+        int ch;
+        while ((ch = fr.read()) != -1) sb.append((char)ch);
+        fr.close();
+        System.out.println(sb);
     }
     public static void main(String[] args) throws IOException, InterruptedException {
-        test8();
+        test8("tempfile2/copy_reName.bat");
     }
 }
