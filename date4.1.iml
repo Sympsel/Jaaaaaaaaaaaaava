@@ -16,5 +16,21 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="commons-io-2.18.0" level="project" />
+    <orderEntry type="library" name="hutool-all-5.8.16-javadoc" level="project" />
+    <orderEntry type="library" name="hutool-all-5.8.16-javadoc  (2)" level="project" />
+    <orderEntry type="library" name="hutool-all-5.8.16-javadoc (2)" level="project" />
+    <orderEntry type="library" name="hutool-all-5.8.16-javadoc (3)" level="project" />
+    <orderEntry type="module-library">
+      <library name="hutool-all-5.8.16-javadoc">
+        <CLASSES />
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/lib/hutool-all-5.8.16-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="hutool-all-5.8.16-javadoc (4)" level="project" />
+    <orderEntry type="library" name="hutool-all-5.8.16" level="project" />
   </component>
 </module>
